@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Burst;
 
 namespace Ihaten
 {
@@ -25,6 +25,7 @@ namespace Ihaten
         bool isFlipping = false;
         bool isRotating = false;
 
+        [BurstCompile]
         void Update()
         {
             float horizontal = Input.GetAxis("Horizontal");

@@ -5,7 +5,7 @@ using Cinemachine;
 
 namespace Ihaten
 {
-    public class NPC : Interactables
+    public class NPC_Shop : Interactables
     {
         [SerializeField] UIShop uishop;
         CinemachineVirtualCamera stallCam;
@@ -24,8 +24,8 @@ namespace Ihaten
             isActive = !isActive;
             stallCam.Priority = isActive?1:0;
             player.GetComponent<CharacterController>().enabled = !isActive;
+            uishop.shop = GetComponent<Shop>();
             uishop.ToggleActive(isActive);
-            
         }
     }
 }

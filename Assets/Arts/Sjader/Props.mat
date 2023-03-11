@@ -60,10 +60,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Metallic: 0.5
+    - _CloudDensity: 0.73
+    - _CloudSize: 0.12
+    - _CloudSpeed: 2
+    - _CloudStrength: 0.96
+    - _Metallic: 0.2
     - _NormalStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.2
-    m_Colors: []
+    m_Colors:
+    - _CloudDir: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
