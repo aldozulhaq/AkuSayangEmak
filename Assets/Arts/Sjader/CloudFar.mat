@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cloud
+  m_Name: CloudFar
   m_Shader: {fileID: -6465566751694194690, guid: 9d68f9127bc33294cbe88610e80c90c7,
     type: 3}
   m_ValidKeywords: []
@@ -39,8 +39,8 @@ Material:
     - _CloudScale: 0.39
     - _CloudSpeed: 1
     - _CloudStrength: 2.95
-    - _DistortScale: 1.13
-    - _DistortSpeed: 2
+    - _DistortScale: 0.14
+    - _DistortSpeed: 4.42
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

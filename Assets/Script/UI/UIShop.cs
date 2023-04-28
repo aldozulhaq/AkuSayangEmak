@@ -9,8 +9,9 @@ namespace Ihaten
         public Shop shop;
         public GameObject shopItemList;
         public GameObject itemTemplate;
-        public Stock selectedStock;
-        
+        public List<Stock> selectedStock;
+        public ItemPopupSetup itemPopup;
+
         protected override void Awake() {
             CleanChildren();
             base.Awake();
@@ -24,6 +25,7 @@ namespace Ihaten
 
         public override void StartDisable()
         {
+            selectedStock.Clear();
             CleanChildren();
             base.StartDisable();
         }
@@ -51,6 +53,12 @@ namespace Ihaten
                 itemTemplate.GetComponent<GenerateShopItem>().SetItem(tempStock);
                 Instantiate(itemTemplate, Vector3.zero, Quaternion.identity, shopItemList.transform);
             }
+        }
+
+        public void BuyClick()
+        {
+            itemPopup.gameObject.SetActive(true);
+            itemPopup.EnablePopup();
         }
     }
 }
