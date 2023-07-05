@@ -45,5 +45,10 @@ namespace Ihaten
                 taskManager.SetTaskDone(taskManager.GetTaskFromItemObject(itemObject), false);
             }
         }
+
+        public int GetTotalPrice()
+        {
+            return totalPrice;
+        }
     }
 }

@@ -20,19 +20,15 @@ namespace Ihaten
         [SerializeField] Button prevButton;
         [SerializeField] Button buyButton;
 
-        [SerializeField] GameObject priceInputListParent;
-        [SerializeField] GameObject priceInput;
-
-        TaskManager taskManager;
+        private PriceInputManager priceInputManager;
 
         protected override void Awake() {
             nextButton.onClick.AddListener(() => NextClick());
             prevButton.onClick.AddListener(() => PrevClick());
             buyButton.onClick.AddListener(() => BuyClick());
 
-            taskManager = FindObjectOfType<TaskManager>();
+            priceInputManager = GetComponentInChildren<PriceInputManager>();
             CleanChildren(shopItemList);
-            CleanChildren(priceInputListParent);
             base.Awake();
         }
 
@@ -46,7 +42,6 @@ namespace Ihaten
         {
             selectedStock.Clear();
             CleanChildren(shopItemList);
-            CleanChildren(priceInputListParent);
 
             // Back to base shop menu
             PrevClick();
@@ -93,7 +88,7 @@ namespace Ihaten
             nextButton.gameObject.SetActive(false);
 
             itemListPanel.SetActive(false);
-            OpenPriceInputPanel();
+            priceInputPanel.SetActive(true);
         }
 
         private void PrevClick()
@@ -106,25 +101,9 @@ namespace Ihaten
             priceInputPanel.SetActive(false);
         }
 
-        private void OpenPriceInputPanel()
+        public List<Stock> GetSelectedStocks()
         {
-            priceInputPanel.SetActive(true);
-
-            CleanChildren(priceInputListParent);
-
-            foreach (Stock stock in shop.stock)
-            {
-                if (taskManager.IsItemInTaskList(stock.item))
-                {
-                    Task tempTask = taskManager.GetTaskFromItemObject(stock.item);
-                    GameObject _tempPriceInput = Instantiate(priceInput, priceInputListParent.transform);
-                    _tempPriceInput.GetComponent<PriceInput>().SetComponent(
-                        stock.item,
-                        stock.item.itemName,
-                        tempTask.amount,
-                        stock.item.cost);
-                }
-            }
+            return selectedStock;
         }
     }
 }

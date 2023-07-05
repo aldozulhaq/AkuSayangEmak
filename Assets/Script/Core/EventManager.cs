@@ -9,6 +9,7 @@ namespace Ihaten
     {
         public static event Action OnClickBuyE;
         public static event Action OnFinishE;
+        public static event Action OnGrandTotalCorrectE;
 
         public static void OnClickBuy()
         {
@@ -18,6 +19,11 @@ namespace Ihaten
         public static void OnFinish()
         {
             OnFinishE?.Invoke();
+        }
+
+        public static void OnGrandTotalCorrect()
+        {
+            OnGrandTotalCorrectE?.Invoke();
         }
     }
 }

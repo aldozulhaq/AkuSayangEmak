@@ -22,14 +22,13 @@ namespace Ihaten
 
         private void OnEnable()
         {
-            EventManager.OnClickBuyE += CheckTask;
+            EventManager.OnGrandTotalCorrectE += CheckTask;
         }
 
         private void OnDisable()
         {
-            EventManager.OnClickBuyE -= CheckTask;
+            EventManager.OnGrandTotalCorrectE -= CheckTask;
         }
-
 
         public List<Task> GetTaskList()
         {
