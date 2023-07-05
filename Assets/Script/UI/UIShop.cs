@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ihaten
 {
@@ -12,8 +13,26 @@ namespace Ihaten
         public List<Stock> selectedStock;
         public ItemPopupSetup itemPopup;
 
+        [SerializeField] GameObject itemListPanel;
+        [SerializeField] GameObject priceInputPanel;
+
+        [SerializeField] Button nextButton;
+        [SerializeField] Button prevButton;
+        [SerializeField] Button buyButton;
+
+        [SerializeField] GameObject priceInputListParent;
+        [SerializeField] GameObject priceInput;
+
+        TaskManager taskManager;
+
         protected override void Awake() {
-            CleanChildren();
+            nextButton.onClick.AddListener(() => NextClick());
+            prevButton.onClick.AddListener(() => PrevClick());
+            buyButton.onClick.AddListener(() => BuyClick());
+
+            taskManager = FindObjectOfType<TaskManager>();
+            CleanChildren(shopItemList);
+            CleanChildren(priceInputListParent);
             base.Awake();
         }
 
@@ -26,17 +45,22 @@ namespace Ihaten
         public override void StartDisable()
         {
             selectedStock.Clear();
-            CleanChildren();
+            CleanChildren(shopItemList);
+            CleanChildren(priceInputListParent);
+
+            // Back to base shop menu
+            PrevClick();
+
             base.StartDisable();
         }
 
-        void CleanChildren()
+        void CleanChildren(GameObject parent)
         {
-            int childrenCount = shopItemList.transform.childCount;
+            int childrenCount = parent.transform.childCount;
 
             for(int i = childrenCount - 1; i >= 0; i--)
             {
-                DestroyImmediate(shopItemList.transform.GetChild(i).gameObject);
+                DestroyImmediate(parent.transform.GetChild(i).gameObject);
             }
         }
 
@@ -57,8 +81,50 @@ namespace Ihaten
 
         public void BuyClick()
         {
-            itemPopup.gameObject.SetActive(true);
-            itemPopup.EnablePopup();
+            EventManager.OnClickBuy();
+            /*itemPopup.gameObject.SetActive(true);
+            itemPopup.EnablePopup();*/
+        }
+
+        private void NextClick()
+        {
+            prevButton.gameObject.SetActive(true);
+            buyButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(false);
+
+            itemListPanel.SetActive(false);
+            OpenPriceInputPanel();
+        }
+
+        private void PrevClick()
+        {
+            prevButton.gameObject.SetActive(false);
+            buyButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(true);
+
+            itemListPanel.SetActive(true);
+            priceInputPanel.SetActive(false);
+        }
+
+        private void OpenPriceInputPanel()
+        {
+            priceInputPanel.SetActive(true);
+
+            CleanChildren(priceInputListParent);
+
+            foreach (Stock stock in shop.stock)
+            {
+                if (taskManager.IsItemInTaskList(stock.item))
+                {
+                    Task tempTask = taskManager.GetTaskFromItemObject(stock.item);
+                    GameObject _tempPriceInput = Instantiate(priceInput, priceInputListParent.transform);
+                    _tempPriceInput.GetComponent<PriceInput>().SetComponent(
+                        stock.item,
+                        stock.item.itemName,
+                        tempTask.amount,
+                        stock.item.cost);
+                }
+            }
         }
     }
 }
