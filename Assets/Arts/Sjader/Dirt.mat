@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dirt
-  m_Shader: {fileID: -6465566751694194690, guid: 7d11830c501fc0a408ae22f6e51f40cb,
-    type: 3}
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -21,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -43,10 +46,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - PixelSnap: 0
     - _CloudDensity: 0.73
     - _CloudSize: 0.12
     - _CloudSpeed: 2
     - _CloudStrength: 0.96
+    - _EnableExternalAlpha: 0
     - _Metallic: 0
     - _NormalStrength: 1
     - _QueueControl: 0
@@ -54,6 +59,9 @@ Material:
     - _Smoothness: 0
     m_Colors:
     - _CloudDir: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.8018868, g: 0.68168783, b: 0.51063544, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &8007673454048020584
 MonoBehaviour:
