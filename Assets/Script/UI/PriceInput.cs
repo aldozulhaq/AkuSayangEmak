@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ihaten
 {
     public class PriceInput : MonoBehaviour
     {
         [SerializeField] TMP_Text itemName;
-        [SerializeField] TMP_Text quantity;
-        [SerializeField] TMP_Text price;
+        [SerializeField] TMP_Text priceTimesQuantity;
         [SerializeField] TMP_InputField totalInputField;
+        [SerializeField] Image itemIcon;
+
         private Item itemObject;
         int totalPrice = 0;
 
@@ -28,8 +30,8 @@ namespace Ihaten
         {
             itemObject = item;
             this.itemName.text = itemName;
-            this.quantity.text = quantity.ToString();
-            this.price.text = price.ToString();
+            this.priceTimesQuantity.text = quantity.ToString() + " x " + price.ToString();
+            itemIcon.sprite = item.sprite;
 
             totalPrice = quantity * price;
         }

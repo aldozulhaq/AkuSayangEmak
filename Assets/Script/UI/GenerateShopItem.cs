@@ -14,16 +14,16 @@ namespace Ihaten
         public TMP_Text itemName;
         public TMP_Text price;
         public Image panel;
+        [SerializeField] private GameObject checkMark;
 
         UIShop uishop;
         Color baseColor;
-        public Color selectedColor;
 
         public void SetItem(Stock stockItem)
         {
             stock = stockItem;
             icon.sprite = stock.item.sprite;
-            amount.text = stock.amount.ToString();
+            //amount.text = stock.amount.ToString();
             itemName.text = stock.item.name;
             price.text = "Rp" + stock.item.cost.ToString();
         }
@@ -38,12 +38,12 @@ namespace Ihaten
             if (!uishop.selectedStock.Contains(stock))
             {
                 uishop.selectedStock.Add(stock);
-                panel.color = selectedColor;
+                checkMark.SetActive(true);
             }
             else
             {
                 uishop.selectedStock.Remove(stock);
-                panel.color = baseColor;
+                checkMark.SetActive(false);
             }
         }
     }
