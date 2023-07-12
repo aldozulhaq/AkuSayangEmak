@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ihaten
 {
@@ -58,6 +59,11 @@ namespace Ihaten
         public virtual void toggleActive(bool status)
         {
             box.GetComponent<InteractBox>().ToggleActive(status);
+
+            if (status)
+                box.GetComponent<Button>().onClick.AddListener(Interact);
+            else
+                box.GetComponent<Button>().onClick.RemoveAllListeners();
         }
 
         public virtual void Interact()

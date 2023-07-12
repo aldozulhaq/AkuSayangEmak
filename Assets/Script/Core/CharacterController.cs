@@ -14,6 +14,7 @@ namespace Ihaten
         [SerializeField] private float rotationLerpSpeed = 5f;
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private Transform TailBone;
+        Joystick joystick;
 
         float currentRotationAngle = 0f;
         float lastHorizontalInput = 0f;
@@ -22,11 +23,19 @@ namespace Ihaten
         Vector3 moveDir;
         bool isRotating = false;
 
+        private void Awake()
+        {
+            joystick = FindObjectOfType<Joystick>();
+        }
+
         [BurstCompile]
         void Update()
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            /*float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");*/
+
+            float horizontal = joystick.Horizontal;
+            float vertical = joystick.Vertical;
 
             moveDir = new Vector3(horizontal, 0f, vertical).normalized;
             
